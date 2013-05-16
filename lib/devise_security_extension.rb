@@ -15,10 +15,6 @@ module Devise
   mattr_accessor :password_regex
   @@password_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
 
-  # How often save old passwords in archive
-  mattr_accessor :password_archiving_count
-  @@password_archiving_count = 5
-
   # Deny old password (true, false, count)
   mattr_accessor :deny_old_passwords
   @@deny_old_passwords = true
@@ -83,7 +79,6 @@ end
 # modules
 Devise.add_module :password_expirable, :controller => :password_expirable, :model => 'devise_security_extension/models/password_expirable', :route => :password_expired
 Devise.add_module :secure_validatable, :model => 'devise_security_extension/models/secure_validatable'
-Devise.add_module :password_archivable, :model => 'devise_security_extension/models/password_archivable'
 Devise.add_module :session_limitable, :model => 'devise_security_extension/models/session_limitable'
 Devise.add_module :expirable, :model => 'devise_security_extension/models/expirable'
 Devise.add_module :security_questionable, :model => 'devise_security_extension/models/security_questionable'

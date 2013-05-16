@@ -20,23 +20,6 @@ module DeviseSecurityExtension
       apply_devise_schema :password_changed_at, DateTime
     end
 
-    # Add password_archivable columns
-    #
-    # Examples
-    #
-    # create_table :old_passwords do
-    #   t.password_archivable
-    # end
-    # add_index :old_passwords, [:password_archivable_type, :password_archivable_id], :name => :index_password_archivable
-    #
-    def password_archivable
-      apply_devise_schema :encrypted_password, String, :limit => 128, :null => false
-      apply_devise_schema :password_salt, String
-      apply_devise_schema :password_archivable_id, Integer, :null => false
-      apply_devise_schema :password_archivable_type, String, :null => false
-      apply_devise_schema :created_at, DateTime
-    end
-
     # Add session_limitable columns in the resource's database table.
     #
     # Examples
