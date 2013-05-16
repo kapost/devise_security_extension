@@ -66,4 +66,3 @@ Devise.add_module :security_questionable, :model => 'devise_security_extension/m
 # requires
 require 'devise_security_extension/routes'
 require 'devise_security_extension/rails'
-require 'devise_security_extension/orm/active_record'

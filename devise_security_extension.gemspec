@@ -39,7 +39,6 @@ Gem::Specification.new do |s|
     "lib/devise_security_extension/models/secure_validatable.rb",
     "lib/devise_security_extension/models/security_questionable.rb",
     "lib/devise_security_extension/models/session_limitable.rb",
-    "lib/devise_security_extension/orm/active_record.rb",
     "lib/devise_security_extension/patches.rb",
     "lib/devise_security_extension/patches/confirmations_controller_captcha.rb",
     "lib/devise_security_extension/patches/passwords_controller_captcha.rb",
