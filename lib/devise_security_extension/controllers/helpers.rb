@@ -3,9 +3,9 @@ module DeviseSecurityExtension
     module Helpers
       extend ActiveSupport::Concern
 
-      # included do
-      #   before_filter :handle_password_change
-      # end
+      included do
+        before_filter :handle_password_change
+      end
       
       module ClassMethods
         # helper for captcha
