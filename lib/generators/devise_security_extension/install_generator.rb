@@ -12,8 +12,6 @@ module DeviseSecurityExtension
         "  # config.expire_password_after = false\n\n" +
         "  # Need 1 char of A-Z, a-z and 0-9\n" +
         "  # config.password_regex = /(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])/\n\n" +
-        "  # Deny old password (true, false, count)\n" +
-        "  # config.deny_old_passwords = true\n\n" +
         "  # enable email validation for :secure_validatable. (true, false, validation_options)\n" +
         "  # dependency: need an email validator like rails_email_validator\n" +
         "  # config.email_validation = true\n\n" +

@@ -15,10 +15,6 @@ module Devise
   mattr_accessor :password_regex
   @@password_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
 
-  # Deny old password (true, false, count)
-  mattr_accessor :deny_old_passwords
-  @@deny_old_passwords = true
-
   # enable email validation for :secure_validatable. (true, false, validation_options)
   # dependency: need an email validator like rails_email_validator
   mattr_accessor :email_validation
@@ -87,5 +83,4 @@ Devise.add_module :security_questionable, :model => 'devise_security_extension/m
 require 'devise_security_extension/routes'
 require 'devise_security_extension/rails'
 require 'devise_security_extension/orm/active_record'
-require 'devise_security_extension/models/old_password'
 require 'devise_security_extension/models/security_question'
