@@ -36,21 +36,6 @@ module Devise
   mattr_accessor :captcha_for_unlock
   @@captcha_for_unlock = false
 
-  # security_question integration for recover form
-  # this automatically enables captchas (captcha_for_recover, as fallback)
-  mattr_accessor :security_question_for_recover
-  @@security_question_for_recover = false
-
-  # security_question integration for unlock form
-  # this automatically enables captchas (captcha_for_unlock, as fallback)
-  mattr_accessor :security_question_for_unlock
-  @@security_question_for_unlock = false
-
-  # security_question integration for confirmation form
-  # this automatically enables captchas (captcha_for_confirmation, as fallback)
-  mattr_accessor :security_question_for_confirmation
-  @@security_question_for_confirmation = false
-
   # captcha integration for confirmation form
   mattr_accessor :captcha_for_confirmation
   @@captcha_for_confirmation = false
@@ -83,4 +68,3 @@ Devise.add_module :security_questionable, :model => 'devise_security_extension/m
 require 'devise_security_extension/routes'
 require 'devise_security_extension/rails'
 require 'devise_security_extension/orm/active_record'
-require 'devise_security_extension/models/security_question'
