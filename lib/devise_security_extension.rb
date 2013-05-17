@@ -61,6 +61,7 @@ Devise.add_module :password_expirable, :controller => :password_expirable, :mode
 Devise.add_module :secure_validatable, :model => 'devise_security_extension/models/secure_validatable'
 Devise.add_module :session_limitable, :model => 'devise_security_extension/models/session_limitable'
 Devise.add_module :expirable, :model => 'devise_security_extension/models/expirable'
+Devise.add_module :session_lockable, :model => 'devise_security_extension/models/session_lockable'
 Devise.add_module :security_questionable, :model => 'devise_security_extension/models/security_questionable'
 
 # requires
