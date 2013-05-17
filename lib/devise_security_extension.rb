@@ -44,6 +44,10 @@ module Devise
   @@expire_after = 90.days
   mattr_accessor :delete_expired_after
   @@delete_expired_after = 90.days
+
+  # Time interval to timeout the user session without activity.
+  mattr_accessor :timeout_in
+  @@timeout_in = 30.minutes
 end
 
 # an security extension for devise
@@ -63,6 +67,7 @@ Devise.add_module :session_limitable, :model => 'devise_security_extension/model
 Devise.add_module :expirable, :model => 'devise_security_extension/models/expirable'
 Devise.add_module :session_lockable, :model => 'devise_security_extension/models/session_lockable'
 Devise.add_module :security_questionable, :model => 'devise_security_extension/models/security_questionable'
+Devise.add_module :advanced_timeoutable, model: 'devise_security_extension/models/advanced_timeoutable'
 
 # requires
 require 'devise_security_extension/routes'
