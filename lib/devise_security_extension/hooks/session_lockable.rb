@@ -6,16 +6,21 @@ end
 
 Warden::Manager.before_failure do |record, warden, options|
   if record.respond_to?(:login_attempts)
-    record.update(login_attempts: record.login_attempts + 1, most_recent_attempt_at: Time.now)
+    if record.advanced_security_required?
+      record.update(login_attempts: record.login_attempts + 1, most_recent_attempt_at: Time.now)
+    end
   else
     request_parameters = record['action_dispatch.request.request_parameters']
     user_parameters = request_parameters['user'] if request_parameters
     email = user_parameters['email'] if user_parameters
     user = User.where(email: email).first
+
     if user
-      user.login_attempts += 1
-      user.most_recent_attempt_at = Time.now
-      user.save
+      if user.advanced_security_required?
+        user.login_attempts += 1
+        user.most_recent_attempt_at = Time.now
+        user.save
+      end
     end
   end
 end

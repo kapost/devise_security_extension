@@ -9,7 +9,7 @@ Warden::Manager.after_set_user do |record, warden, options|
 
 
   if record && record.respond_to?(:timedout?) && warden.authenticated?(scope) && options[:store] != false
-    warden.session(scope)['advanced_security_required'] = record.advanced_security_required? if !warden.session(scope)['advanced_security_required']
+    warden.session(scope)['advanced_security_required'] = record.advanced_security_required? if !warden.session(scope).has_key?('advanced_security_required')
 
     if warden.session(scope)['advanced_security_required']
       last_request_at = warden.session(scope)['last_request_at']
