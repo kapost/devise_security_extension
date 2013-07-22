@@ -13,7 +13,7 @@ Warden::Manager.before_failure do |record, warden, options|
     request_parameters = record['action_dispatch.request.request_parameters']
     user_parameters = request_parameters['user'] if request_parameters
     email = user_parameters['email'] if user_parameters
-    user = User.where(email: email).first
+    user = User.where(email: email).first if email
 
     if user
       if user.advanced_security_required?
