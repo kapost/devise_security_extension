@@ -13,7 +13,6 @@ Warden::Manager.after_set_user do |record, warden, options|
 
     if warden.session(scope)['advanced_security_required']
       last_request_at = warden.session(scope)['last_request_at']
-      puts "last_request_at : #{last_request_at}"
 
       if record.timedout?(last_request_at) && !env['devise.skip_timeout']
         warden.logout(scope)
