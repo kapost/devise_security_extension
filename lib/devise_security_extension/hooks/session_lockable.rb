@@ -1,7 +1,13 @@
-Warden::Manager.before_failure do |env, warden, options|
-  request_parameters = env['action_dispatch.request.request_parameters']
-  user_parameters = request_parameters['user'] if request_parameters
-  email = user_parameters['email'] if user_parameters
+module LoginEnv
+  def self.extract_email(env)
+    env['action_dispatch.request.request_parameters']['user']['email']
+  rescue
+    nil
+  end
+end
+
+Warden::Manager.before_failure do |env, warden, _options|
+  email =  LoginEnv.extract_email(env)
   scope = warden[:scope].to_s.classify.constantize if warden[:scope]
   record = scope.where(email: email).first if email && scope
 
@@ -11,7 +17,7 @@ Warden::Manager.before_failure do |env, warden, options|
   end
 end
 
-Warden::Manager.after_set_user do |record, auth, opts|
+Warden::Manager.after_set_user do |record, auth, _options|
   if record.login_attempts > 6 && record.most_recent_attempt_at >= 3.minutes.ago
     auth.logout
     throw :warden, message: 'Your account has been locked out. Please confirm your password and try back later.'
