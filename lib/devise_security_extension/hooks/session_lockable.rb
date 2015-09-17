@@ -4,11 +4,25 @@ module LoginEnv
   rescue
     nil
   end
+
+  def self.extract_default_scope(env)
+    env['warden'].config.default_scope.safe_constantize
+  rescue
+    nil
+  end
+
+  def self.extract_scope(env, warden)
+    if scope = warden[:scope]
+      scope.to_s.classify.safe_constantize || extract_default_scope(env)
+    else
+      nil
+    end
+  end
 end
 
 Warden::Manager.before_failure do |env, warden, _options|
-  email =  LoginEnv.extract_email(env)
-  scope = warden[:scope].to_s.classify.constantize if warden[:scope]
+  email = LoginEnv.extract_email(env)
+  scope = LoginEnv.extract_scope(env, warden)
   record = scope.where(email: email).first if email && scope
 
   if record && record.advanced_security_required?
