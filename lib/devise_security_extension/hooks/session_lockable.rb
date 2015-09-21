@@ -6,7 +6,7 @@ module LoginEnv
   end
 
   def self.extract_default_scope(env)
-    env['warden'].config.default_scope.safe_constantize
+    env['warden'].config.default_scope.to_s.classify.safe_constantize
   rescue
     nil
   end
