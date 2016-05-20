@@ -20,6 +20,7 @@ Warden::Manager.after_set_user :only => :fetch do |record, warden, options|
   if warden.authenticated?(scope) && options[:store] != false
     unless record.is_superadmin?
       if record.unique_session_id != warden.session(scope)['unique_session_id'] && !env['devise.skip_session_limitable']
+        Rails.logger.info "SESSION LIMITABLE LOGOUT: #{record.id} - #{warden.request.path} : #{warden.request.params.inspect}" if defined?(Rails) && ENV['SESSION_LIMITABLE_VERBOSE'] == '1'
         warden.logout(scope)
         throw :warden, :scope => scope, :message => :session_limited
       end
